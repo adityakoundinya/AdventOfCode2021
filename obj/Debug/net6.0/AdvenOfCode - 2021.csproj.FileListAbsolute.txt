@@ -1,0 +1,15 @@
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/AdvenOfCode - 2021
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/AdvenOfCode - 2021.deps.json
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/AdvenOfCode - 2021.runtimeconfig.json
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/AdvenOfCode - 2021.dll
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/ref/AdvenOfCode - 2021.dll
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/bin/Debug/net6.0/AdvenOfCode - 2021.pdb
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.csproj.AssemblyReference.cache
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.GeneratedMSBuildEditorConfig.editorconfig
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.AssemblyInfoInputs.cache
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.AssemblyInfo.cs
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.csproj.CoreCompileInputs.cache
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.dll
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/ref/AdvenOfCode - 2021.dll
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.pdb
+/Users/ak299n/Documents/SourceCode/AdvenOfCode - 2021/obj/Debug/net6.0/AdvenOfCode - 2021.genruntimeconfig.cache
