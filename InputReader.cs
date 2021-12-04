@@ -30,8 +30,9 @@ namespace AdventOfCode{
       FileStream fileStream = new FileStream(_baseFolder + fileName, FileMode.Open);
       using (StreamReader streamReader = new StreamReader(fileStream)){
         string? line = streamReader.ReadLine();
-        var nums = line?.Split(',');
-        foreach(var i in nums) result.Add(int.Parse(i));
+        if(line == null) return new List<int>();
+        var num = line.Split(',');
+        foreach(var i in num) result.Add(int.Parse(i));
       }
       fileStream.Close();
       fileStream.Dispose();
@@ -43,12 +44,13 @@ namespace AdventOfCode{
       FileStream fileStream = new FileStream(_baseFolder + fileName, FileMode.Open);
       using (StreamReader streamReader = new StreamReader(fileStream)){
         streamReader.ReadLine();
-        var line = streamReader.ReadLine();
+        string? line = streamReader.ReadLine();
         int id = 0;
         while(line != null){
           int[,] board = new int[5,5];
           for(int i = 0; i < 5; i++){
             line = streamReader.ReadLine();
+            if(line == null) break;
             var num = line.Split(' ').ToList();
             num.RemoveAll(o=> o == string.Empty);
             for(int j = 0; j < 5; j++){
