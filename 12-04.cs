@@ -18,6 +18,24 @@ namespace AdventOfCode{
         }
         if(result > 0) break;
       }
+      result = 0;
+      HashSet<int> boardsWon = new HashSet<int>();
+      foreach(var d in draws){
+        var locs = locations[d];
+        foreach(var loc in locs){
+          if(boardsWon.Contains(loc.BoardId)) continue;
+          var board = boards[loc.BoardId];
+          if(Check(board, loc)){
+            boardsWon.Add(loc.BoardId);
+            if(boardsWon.Count == boards.Count){
+              result = CalculateAnswer(board, d);
+              Console.WriteLine("Second: " + result);
+              break;
+            }
+          }
+        }
+        if(result > 0) break;
+      }
     }
 
     private Dictionary<int, List<Location>> BuildNumLocation(Dictionary<int, int[,]> boards){
