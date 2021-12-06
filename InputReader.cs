@@ -65,5 +65,22 @@ namespace AdventOfCode{
       fileStream.Dispose();
       return result;
     }
+
+    public List<int> GetInputAsIntFromCsv(string fileName){
+      List<int> result = new List<int>();
+      FileStream fileStream = new FileStream(_baseFolder + fileName, FileMode.Open);
+      using (StreamReader streamReader = new StreamReader(fileStream)){
+        string? line = streamReader.ReadLine();
+        if(line != null){
+          var num = line.Split(',');
+          foreach(var i in num){
+          result.Add(int.Parse(i));
+          }
+        }
+      }
+      fileStream.Close();
+      fileStream.Dispose();
+      return result;
+    }
   }
 }
