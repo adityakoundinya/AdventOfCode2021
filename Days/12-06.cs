@@ -3,40 +3,27 @@ namespace AdventOfCode{
     public void Run(){
       InputReader inputReader = new InputReader();
       var input = inputReader.GetInputAsIntFromCsv("Lanternfish.txt");
-      List<Lineage> parents = new List<Lineage>();
-      foreach(var i in input) parents.Add(new Lineage(i));
-      long result = parents.Count;
-      for(int i = 0; i < 80; i++){
-        foreach(var c in parents){
-          result += DFS(c);
-        }
+      Dictionary<int, long> fish = new Dictionary<int, long>();
+      for(int i = -1; i < 9; i++) fish[i] = 0;
+      foreach(var i in input) fish[i]++;
+      for(int i = 0; i < 256; i++){
+        Count(fish);
       }
-      Console.WriteLine("First: " + result);
-    }
-
-    private long DFS(Lineage child){
-      if(child == null) return 0;
       long result = 0;
-      foreach(var c in child.Children){
-        result += DFS(c);
-      }
-      child.Timer--;
-      if(child.Timer == -1){
-        child.Children.Add(new Lineage(8));
-        child.Timer = 6;
-        result++;
-      }
-      return result;
+      foreach(var kvp in fish) result += kvp.Value;
+      Console.WriteLine("Second: " + result);
     }
-  }
 
-  public class Lineage{
-    public int Timer { get; set; }
-    public List<Lineage> Children { get; set; }
-    public Lineage (int timer)
-    {
-      Timer = timer;
-      Children = new List<Lineage>();
+    private void Count(Dictionary<int, long> fish){
+      foreach(var kvp in fish){
+        if(kvp.Key == -1) continue;
+        fish[kvp.Key - 1] += fish[kvp.Key];
+        fish[kvp.Key] = 0;
+      }
+      long birth = fish[-1];
+      fish[8] += birth;
+      fish[6] += birth;
+      fish[-1] = 0;
     }
   }
 }
