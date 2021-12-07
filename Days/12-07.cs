@@ -18,6 +18,17 @@ namespace AdventOfCode{
         result = Math.Min(result, temp);
       }
       Console.WriteLine("First: " + result);
+
+      result = int.MaxValue;
+      for(int i = low; i <= high; i++){
+        int temp = 0;
+        foreach(var n in input){
+          int l = Math.Abs(i - n);
+          temp += (l * (l + 1)) / 2;
+        }
+        result = Math.Min(result, temp);
+      }
+      Console.WriteLine("Second: " + result);
     }
   }
 }
