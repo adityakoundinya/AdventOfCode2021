@@ -10,6 +10,7 @@ namespace AdventOfCode{
         var right = point[1].Split(',');
         (int r, int c) start = (int.Parse(left[0]), int.Parse(left[1]));
         (int r, int c) end = (int.Parse(right[0]), int.Parse(right[1]));
+        //vertical line
         if(start.r == end.r){
           int low = start.c < end.c ? start.c : end.c;
           int high = start.c > end.c ? start.c : end.c;
@@ -17,6 +18,7 @@ namespace AdventOfCode{
             if(!points.ContainsKey((start.r, j))) points[(start.r, j)] = 0;
             points[(start.r, j)]++;
           }
+        //horizontal line
         }else if(start.c == end.c){
           int low = start.r < end.r ? start.r : end.r;
           int high = start.r > end.r ? start.r : end.r;
@@ -24,6 +26,7 @@ namespace AdventOfCode{
             if(!points.ContainsKey((j, start.c))) points[(j, start.c)] = 0;
             points[(j, start.c)]++;
           }
+        //diagonal line
         }else{
           while(start != end){
             if(!points.ContainsKey((start.r, start.c))) points[(start.r, start.c)] = 0;
