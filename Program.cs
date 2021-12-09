@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode{
   class Program{
     public static void Main(){
-      var puzzle = new SevenSegmentSearch();
+      var puzzle = new SmokeBasin();
       puzzle.Run();
     }
   }
