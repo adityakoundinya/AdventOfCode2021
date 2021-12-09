@@ -44,14 +44,12 @@ namespace AdventOfCode{
 
     private int DFS(List<List<int>> matrix, int row, int col, HashSet<(int, int)> memo){
       int result = 0;
-      int workingOn = matrix[row][col];
       for(int i = 0; i < 4; i++){
         int r = row + steps[i, 0];
         int c = col + steps[i, 1];
         if(!isValid(matrix, r, c) || memo.Contains((r, c))) continue;
         if(matrix[r][c] == 9) continue;
         if(matrix[row][col] >= matrix[r][c]) continue;
-        int next = matrix[r][c];
         memo.Add((r, c));
         result += DFS(matrix, r, c, memo);
       }
