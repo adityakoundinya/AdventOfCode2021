@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode{
   class Program{
     public static void Main(){
-      var puzzle = new DumboOctopus();
+      var puzzle = new PassagePathing();
       puzzle.Run();
     }
   }
