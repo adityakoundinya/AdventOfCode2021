@@ -1,22 +1,20 @@
 using System.Text;
 namespace AdventOfCode {
   public class PacketDecoder: IPuzzle {
-    long firstResult = 0;
+    long version = 0;
     Dictionary<char, string> H2BMap = new Dictionary<char, string>();
     public void Run(){
       LoadDict();
       InputReader inputReader = new InputReader();
-      var input = inputReader.GetInputAsString("test.txt");
+      var input = inputReader.GetInputAsString("PacketDecoder.txt");
       var packet = GetBinaryString(input[0]);
       var result = DecodePacket(packet);
-      Console.WriteLine("First: " + firstResult);
+      Console.WriteLine("First: " + version);
       Console.WriteLine("Second: "+ result.res);
-      //1470257122
-      //14355159010
     }
 
     private (int ctn, long res) DecodePacket(string packet){
-      firstResult += GetInt(packet, 0, 3);
+      version += GetInt(packet, 0, 3);
       long type = GetInt(packet, 3, 3);
       if(type == 4){
         return ParseNumbers(packet, 6);
@@ -29,11 +27,10 @@ namespace AdventOfCode {
     private (int ctn, long res) ParseAsLength(string packet, int idx, long type){
       long len = GetInt(packet, idx, 15);
       idx += 15;
-      int i = 0;
       List<long> nums = new List<long>();
-      while(i < len){
+      while(len > 0){
         var result = DecodePacket(packet.Substring(idx));
-        i += result.ctn;
+        len -= result.ctn;
         idx += result.ctn;
         nums.Add(result.res);
       }
@@ -44,12 +41,11 @@ namespace AdventOfCode {
     private (int ctn, long res) ParseAsPackets(string packet, int idx, long type){
       long num = GetInt(packet, idx, 11);
       idx += 11;
-      int i = 0;
       List<long> nums = new List<long>();
-      while(i < num){
+      while(num > 0){
         var result = DecodePacket(packet.Substring(idx));
         idx += result.ctn;
-        i++;
+        num--;
         nums.Add(result.res);
       }
       long res = Eval(type, nums);
@@ -64,12 +60,14 @@ namespace AdventOfCode {
 
     private (int idx, long res) ParseNumbers(string packet, int idx){
       long res = 0;
+      StringBuilder binNum = new StringBuilder();
       while(idx < packet.Length){
-        string binNum = packet.Substring(idx, 5);
-        res = res * 10 + GetInt(binNum, 1, 4);
+        var temp = packet.Substring(idx, 5);
+        binNum.Append(temp.Substring(1));
         idx += 5;
-        if(binNum[0] == '0') break;
+        if(temp[0] == '0') break;
       }
+      res = GetInt(binNum.ToString(), 0, binNum.Length);
       return (idx, res);
     }
 
