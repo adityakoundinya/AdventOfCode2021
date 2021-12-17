@@ -7,6 +7,7 @@ namespace AdventOfCode{
     public void Run(){
       InputReader inputReader = new InputReader();
       var input = inputReader.GetInputAsString("TrickShot.txt");
+
       var range = input[0].Split(':')[1].Trim();
       var xRange = range.Split(',')[0].Trim();
       var yRange = range.Split(',')[1].Trim();
@@ -16,15 +17,17 @@ namespace AdventOfCode{
       var yStr = yRange.Split('=')[1].Split("..");
       y1 = int.Parse(yStr[1]);
       y2 = int.Parse(yStr[0]);
+
       long maxY = (y2 * (y2 +  1)) / 2;
       Console.WriteLine("First: " + maxY);
-      HashSet<(int, int)> result = new HashSet<(int, int)>();
+
+      int result = 0;
       for(int x = 0; x <= x2; x++){
         for(int y = y2; y <= maxY; y++){
-          if(IsHit(x, y)) result.Add((x, y));
+          if(IsHit(x, y)) result++;
         }
       }
-      Console.WriteLine("Second: " + result.Count);
+      Console.WriteLine("Second: " + result);
     }
 
     private bool IsHit(int x, int y){
