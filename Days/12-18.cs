@@ -7,27 +7,45 @@ namespace AdventOfCode
     public void Run()
     {
       InputReader inputReader = new InputReader();
-      var input = inputReader.GetInputAsString("test.txt");
+      var input = inputReader.GetInputAsString("SnailFish.txt");
       string s = input[0];
       for(int i = 1; i < input.Count; i++){
         s = Add(s, input[i]);
         s = Process(s);
       }
-      Console.WriteLine("Final Sum: " + s);
+      //Console.WriteLine("Final Sum: " + s);
       Console.WriteLine("First: " + Magnitude(s));
+
+      long result = 0;
+      for(int i = 0; i < input.Count; i++){
+        for(int j = 0; j < input.Count; j++){
+          if(i == j) continue;
+          string twoSum = Add(input[i], input[j]);
+          twoSum = Process(twoSum);
+          result = Math.Max(result, Magnitude(twoSum));
+        }
+      }
+      Console.WriteLine("Second: " + result);
     }
 
     private string Add(string s1, string s2)
     {
-      return $"[{s1},{s2}]";
+      string s = $"[{s1},{s2}]";
+      //Console.WriteLine("Add : " + s);
+      return s;
     }
     private string Process(string s){
-      int len = 0;
+      bool didExplode = false;
+      bool didSplit = false;
       do{
-        len = s.Length;
-        s = Explode(s);
-        s = Split(s);
-      }while(len != s.Length);
+        var exp = Explode(s);
+        s = exp.s;
+        didExplode = exp.didExplode;
+        var split = Split(s);
+        s = split.s;
+        didSplit = split.didSplit;
+
+      }while(didExplode || didSplit);
       return s;
     }
     private List<string> SplitStringToList(string s){
@@ -44,10 +62,12 @@ namespace AdventOfCode
       }
       return st;
     }
-    private string Split(string s){
+    private (bool didSplit, string s) Split(string s){
+      bool didSplit = false;
       List<string> st = SplitStringToList(s);
       for(int i = 0; i < st.Count; i++){
         if(st[i].Length == 2){
+          didSplit = true;
           var regNum = Convert.ToDecimal(st[i]);
           int down = (int)Math.Floor(regNum / 2);
           int up = (int)Math.Ceiling(regNum / 2);
@@ -55,11 +75,14 @@ namespace AdventOfCode
           break;
         }
       }
-      return string.Join(string.Empty, st);
+      string sSplit = string.Join(string.Empty, st);
+      //Console.WriteLine("Split: " + sSplit);
+      return (didSplit, sSplit);
     }
-    private string Explode(string s1)
+    private (bool didExplode, string s) Explode(string s1)
     {
       List<string> st = new List<string>();
+      bool didExplode = false;
       bool done = false;
       do
       {
@@ -126,6 +149,7 @@ namespace AdventOfCode
         }
         if (done)
         {
+          didExplode = true;
           int i = insertIdx - 1;
           while (i >= 0)
           {
@@ -156,11 +180,12 @@ namespace AdventOfCode
           }
           s1 = string.Join(string.Empty, st);
           st = new List<string>();
+          //Console.WriteLine("Explode: " + s1);
         }
       } while (done);
-      return string.Join(string.Empty, st);
+      return (didExplode, s1);
     }
-    private string Magnitude(string s){
+    private long Magnitude(string s){
       List<string> lstStr = SplitStringToList(s);
       Stack<string> st = new Stack<string>();
       foreach(var i in lstStr){
@@ -175,7 +200,7 @@ namespace AdventOfCode
           st.Push(temp.ToString());
         }
       }
-      return string.Join(string.Empty, st);
+      return long.Parse(string.Join(string.Empty, st));
     }
   }
 }
