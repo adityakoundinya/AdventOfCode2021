@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode{
   class Program{
     public static void Main(){
-      var puzzle = new TrickShot();
+      var puzzle = new SnailFish();
       puzzle.Run();
     }
   }
