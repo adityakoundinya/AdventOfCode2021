@@ -1,7 +1,7 @@
 ﻿namespace AdventOfCode{
   class Program{
     public static void Main(){
-      var puzzle = new BeaconScanner();
+      var puzzle = new DiracDice();
       puzzle.Run();
     }
   }

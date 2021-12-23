@@ -37,7 +37,7 @@ namespace AdventOfCode
       var q = new Queue<Scanner>();
 
       // when a scanner is located, it gets into the queue so that we can
-      // explore its neighbours.
+      // explore its neighbors.
 
       locatedScanners.Add(scanners.First());
       q.Enqueue(scanners.First());
@@ -63,7 +63,7 @@ namespace AdventOfCode
 
       return locatedScanners;
     }
-    Scanner TryToLocate(Scanner scannerA, Scanner scannerB)
+    Scanner? TryToLocate(Scanner scannerA, Scanner scannerB)
     {
       var beaconsInA = scannerA.GetBeaconsInWorld().ToArray();
 
