@@ -1,3 +1,4 @@
+using System.Text;
 namespace AdventOfCode{
   public class InputReader{
     private const string _baseFolder = "Inputs/";
@@ -14,6 +15,21 @@ namespace AdventOfCode{
       fileStream.Close();
       fileStream.Dispose();
       return input;
+    }
+
+    public string GetInputAsBlob(string fileName){
+      StringBuilder sb = new StringBuilder();
+      FileStream fileStream = new FileStream(_baseFolder + fileName, FileMode.Open);
+      using (StreamReader streamReader = new StreamReader(fileStream)){
+        string? line = streamReader.ReadLine();
+        while(line != null){
+          sb.AppendLine(line);
+          line = streamReader.ReadLine();
+        }
+      }
+      fileStream.Close();
+      fileStream.Dispose();
+      return sb.ToString();
     }
 
     public List<int> GetInputAsInt(string fileName){
